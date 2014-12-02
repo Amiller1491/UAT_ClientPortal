@@ -1,0 +1,49 @@
+﻿@model Final.Models.ProjectModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit @Html.DisplayFor(model => model.Name)</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend></legend>
+
+        <div>
+
+</div>
+        <br />
+
+        @Html.HiddenFor(model => model.ProjectID)
+
+        <div class="editor-label">
+            <b>Name</b>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            <b>Client</b>
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("UserID", String.Empty)
+            @Html.ValidationMessageFor(model => model.UserID)
+        </div>
+
+
+        <p>
+            <input class="btn btn-small btn-primary" type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

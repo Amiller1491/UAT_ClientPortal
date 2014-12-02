@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+</br>
+</br>
+</br>
+</br>
+
+
+
+<div class="hero-unit" style="text-align:center">
+
+    @if(User.Identity.IsAuthenticated){
+
+
+             if (User.IsInRole("Admin")){
+                 
+                <h1> Hello, @HttpContext.Current.User.Identity.Name</h1>     
+                <h2> You are an Admin</h2>
+            }
+            if (User.IsInRole("Client")){
+                <h1> Hello, @HttpContext.Current.User.Identity.Name</h1>     
+                <h2> You are a Client</h2>
+            }
+            
+
+    
+
+                <br />
+
+              <p><b>Final Phase</b></p>
+                <p>Group II: Adam Miller, Rabin Pun, Lance Ugalde, Ghislaine Scheers</p>
+              <p>
+                <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-primary btn-large btn-success">
+                  Log Out
+                </a>
+              </p>
+        
+    }
+    
+    @if(!User.Identity.IsAuthenticated){
+    
+
+    <h1>Welcome! Please Log In</h1>
+        <br />
+
+    <p><b>Final Phase</b></p>
+    <p>Group II: Adam Miller, Rabin Pun, Lance Ugalde, Ghislaine Scheers</p>
+  <p>
+      <br />
+    <a href="~/Account/Login" class="btn btn-primary btn-large btn-success">
+      Log In
+    </a>
+  </p>
+    }
+
+</div>
+   
+<hr />
+<div class="footer-wrapper" style="text-align:center">
+					<footer>
+                        <p>© CMPS383 Spring 2013</p>
+					</footer>
+		    </div>
+
+
+
+
+
+

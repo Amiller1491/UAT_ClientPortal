@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Final.Models.ProjectModel>
+
+
+<h2>Projects</h2>
+@if(User.IsInRole("Admin")){
+<p>
+    @*@Html.ActionLink("Add Project", "Create",null, new { @class="btn btn-small btn-primary"})*@
+    <a class="btn btn-primary" href="~/Project/Create" ><i class="icon-plus"></i> Add Project</a>
+</p>
+}
+
+<table class="table tbody table-striped tbody table-hover tbody tr:hover table-bordered width:50%">
+    <tr class="success">
+        <th>
+            Name
+        </th>
+        <th>
+            Assigned to
+        </th>
+        <th>
+            @if(User.IsInRole("Admin")){
+            <span> Actions</span>
+            }
+
+        </th>
+    </tr>
+@if(User.IsInRole("Client")){
+foreach (var item in Model) {
+    
+    if(item.User.Email == User.Identity.Name){ 
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.FirstName)
+        </td>
+        <td>
+            @Html.ActionLink("View UATs", "ViewUATs", "Project", new { id=item.ProjectID },new { @class="btn btn-mini"})
+            
+            @if(User.IsInRole("Admin")){
+            @Html.Raw(" | ");
+            @Html.ActionLink("Edit", "Edit", new { id=item.ProjectID },new { @class="btn btn-mini"}) @Html.Raw(" | ");
+            @Html.ActionLink("Delete", "Delete", new { id=item.ProjectID },new { @class="btn btn-mini btn-danger"})
+            }
+        </td>
+    </tr>
+        }
+    }
+    }
+    else{
+    foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.FirstName)
+        </td>
+        <td>
+            @Html.ActionLink("View UATs", "ViewUATs", "Project", new { id=item.ProjectID },new { @class="btn btn-mini"})
+            
+            @if(User.IsInRole("Admin")){
+            @Html.Raw(" | ");
+            @Html.ActionLink("Edit", "Edit", new { id=item.ProjectID },new { @class="btn btn-mini"}) @Html.Raw(" | ");
+            @Html.ActionLink("Delete", "Delete", new { id=item.ProjectID },new { @class="btn btn-mini btn-danger"})
+            }
+        </td>
+    </tr>
+        
+    }
+    }
+    
+
+
+</table>

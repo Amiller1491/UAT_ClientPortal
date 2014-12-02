@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Final.Models.TestCaseModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>All Test Cases</h2>
+@if(User.IsInRole("Admin")){
+<p>
+    @*@Html.ActionLink("Add TestCase", "Create",null, new { @class="btn btn-small btn-primary"})*@
+    <a class="btn btn-primary" href="~/TestCase/Create" ><i class="icon-plus"></i> Add Test Case</a>
+</p>
+}
+<table class="table tbody table-striped  tbody table-hover tbody tr:hover table-bordered">
+    <tr>
+        <th>
+            Title
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            UAT
+        </th>
+        <th>Action</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status.StatusType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UAT.Name)
+        </td>
+        <td>
+            @if(User.IsInRole("Admin")){
+            @Html.ActionLink("Edit", "Edit", new { id=item.TestCaseID }, new { @class="btn btn-mini"}) @Html.Raw(" | ");
+            @Html.ActionLink("Delete", "Delete", new { id=item.TestCaseID }, new { @class="btn btn-mini btn-danger"})
+            }
+        </td>
+    </tr>
+}
+
+</table>

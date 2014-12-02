@@ -1,0 +1,209 @@
+﻿@model Final.Models.TestCaseModel
+<div style="margin-top:-40px;">
+<h2>@Html.DisplayFor(model =>model.Title)</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+        if(Model.UAT != null){
+       <h5> @Html.Raw(Model.UAT.Intro)</h5>
+         }
+if(User.IsInRole("Admin")){
+    <fieldset>
+        <hr style="width:50%;"/>
+
+        @Html.HiddenFor(model => model.TestCaseID)
+
+        <div class="editor-label">
+            <b>Title</b>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+  <div class="row">
+      <div class="span3">
+        <div class="editor-label">
+            <b>Steps</b>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Steps)
+            @Html.ValidationMessageFor(model => model.Steps)
+        </div>
+     </div>
+
+      <div class="span1">
+      </div>
+
+      <div class="span3">
+        <div class="editor-label">
+            <b>Comments</b>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Comments)
+            @Html.ValidationMessageFor(model => model.Comments)
+        </div>
+       </div>
+  </div>
+
+        <div class="editor-label">
+            <br />  
+        </div>
+       @if(Model.StatusD.Equals(3)){ 
+        <div class="editor-field" style="padding-left:4%">      
+            <div class="btn-group" data-toggle="buttons-radio">
+              <button id="StatusD" name="StatusD" class="btn btn-large btn-success active" style="width:65%" value="3">Accept</button>
+              <button id="StatusD" name="StatusD" class="btn btn-large btn-warning" style="width:66%" value="5">In Progress</button>
+              <button id="StatusD" name="StatusD" class="btn btn-large btn-danger"style="width:62%" value="4">Reject</button>
+               @Html.HiddenFor(model => model.StatusD)
+            </div>
+        </div>
+       }
+       else if(Model.StatusD.Equals(5)){
+        <div class="editor-field" style="padding-left:4%">      
+            <div class="btn-group" data-toggle="buttons-radio">
+              <button id="StatusD" name="StatusD" class="btn btn-large btn-success" style="width:65%" value="3">Accept</button>
+              <button id="StatusD" name="StatusD" class="btn btn-large btn-warning active" style="width:66%" value="5">In Progress</button>
+              <button id="StatusD" name="StatusD" class="btn btn-large btn-danger"style="width:62%" value="4">Reject</button>
+               @Html.HiddenFor(model => model.StatusD)
+            </div>
+        </div>   
+       }
+       else if(Model.StatusD.Equals(4)){
+         <div class="editor-field" style="padding-left:4%">      
+            <div class="btn-group" data-toggle="buttons-radio">
+              <button id="StatusD" name="StatusD" class="btn btn-large btn-success" style="width:65%" value="3">Accept</button>
+              <button id="StatusD" name="StatusD" class="btn btn-large btn-warning" style="width:66%" value="5">In Progress</button>
+              <button id="StatusD" name="StatusD" class="btn btn-large btn-danger active"style="width:62%" value="4">Reject</button>
+               @Html.HiddenFor(model => model.StatusD)
+            </div>
+        </div>  
+       }
+       else{
+         <div class="editor-field" style="padding-left:4%">      
+            <div class="btn-group" data-toggle="buttons-radio">
+              <button id="StatusD" name="StatusD" class="btn btn-large btn-success" style="width:65%" value="3">Accept</button>
+              <button id="StatusD" name="StatusD" class="btn btn-large btn-warning" style="width:66%" value="5">In Progress</button>
+              <button id="StatusD" name="StatusD" class="btn btn-large btn-danger"style="width:62%" value="4">Reject</button>
+               @Html.HiddenFor(model => model.StatusD)
+            </div>
+        </div>
+       }      
+            
+        
+        <div class="editor-label">
+            <b>UAT</b>
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("UATID", String.Empty)
+            @Html.ValidationMessageFor(model => model.UATID)
+        </div>
+
+        <p style="padding-left:4%">
+            <input class="btn btn-primary" type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+else{
+       <fieldset>
+           <hr style=50% />
+        @Html.HiddenFor(model => model.TestCaseID)
+
+        <div hidden="hidden" class="editor-label">
+            Title
+        </div>
+        <div hidden="hidden" class="editor-field">
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+    <div class="row">
+      <div class="span3">
+        <div class="editor-label">
+            <b>Steps</b>
+        </div>
+        <div hidden="hidden" class="editor-field">
+            @Html.EditorFor(model => model.Steps)
+            @Html.ValidationMessageFor(model => model.Steps)
+        </div>
+        <div class="editor-field">
+            @Html.Raw(Model.Steps)
+        </div>
+    </div>
+      
+      <div class="span1">
+      </div>
+
+    <div class="span3">
+        <div class="editor-label">
+            <b>Comments</b>
+        </div>
+        <div  class="editor-field">
+            @Html.EditorFor(model => model.Comments)
+            @Html.ValidationMessageFor(model => model.Comments)
+        </div>
+    </div>
+
+</div>
+        <div hidden="hidden" class="editor-label">
+            UAT
+        </div>
+        <div hidden="hidden"class="editor-field">
+            @Html.DropDownList("UATID", String.Empty)
+            @Html.ValidationMessageFor(model => model.UATID)
+        </div>
+           <br />
+               @if(Model.StatusD.Equals(3)){ 
+        <div class="editor-field" style="padding-left:4%">      
+            <div class="btn-group" data-toggle="buttons-radio">
+              <button id="StatusD" name="StatusD" class="btn btn-large btn-success active" style="width:65%" value="3">Accept</button>
+              <button id="StatusD" name="StatusD" class="btn btn-large btn-warning" style="width:66%" value="5">In Progress</button>
+              <button id="StatusD" name="StatusD" class="btn btn-large btn-danger"style="width:62%" value="4">Reject</button>
+               @Html.HiddenFor(model => model.StatusD)
+            </div>
+        </div>
+       }
+       else if(Model.StatusD.Equals(5)){
+        <div class="editor-field" style="padding-left:4%">      
+            <div class="btn-group" data-toggle="buttons-radio">
+              <button id="StatusD" name="StatusD" class="btn btn-large btn-success" style="width:65%" value="3">Accept</button>
+              <button id="StatusD" name="StatusD" class="btn btn-large btn-warning active" style="width:66%" value="5">In Progress</button>
+              <button id="StatusD" name="StatusD" class="btn btn-large btn-danger"style="width:62%" value="4">Reject</button>
+               @Html.HiddenFor(model => model.StatusD)
+            </div>
+        </div>   
+       }
+       else if(Model.StatusD.Equals(4)){
+         <div class="editor-field" style="padding-left:4%">      
+            <div class="btn-group" data-toggle="buttons-radio">
+              <button id="StatusD" name="StatusD" class="btn btn-large btn-success" style="width:65%" value="3">Accept</button>
+              <button id="StatusD" name="StatusD" class="btn btn-large btn-warning" style="width:66%" value="5">In Progress</button>
+              <button id="StatusD" name="StatusD" class="btn btn-large btn-danger active"style="width:62%" value="4">Reject</button>
+               @Html.HiddenFor(model => model.StatusD)
+            </div>
+        </div>  
+       }
+       else{
+         <div class="editor-field" style="padding-left:4%">      
+            <div class="btn-group" data-toggle="buttons-radio">
+              <button id="StatusD" name="StatusD" class="btn btn-large btn-success" style="width:65%" value="3">Accept</button>
+              <button id="StatusD" name="StatusD" class="btn btn-large btn-warning" style="width:66%" value="5">In Progress</button>
+              <button id="StatusD" name="StatusD" class="btn btn-large btn-danger"style="width:62%" value="4">Reject</button>
+               @Html.HiddenFor(model => model.StatusD)
+            </div>
+        </div>
+       }  
+            @Html.ValidationMessageFor(model => model.StatusD)
+        <br />
+        <p style="padding-left:4%">
+            <input class="btn btn-primary"  type="submit" value="Save" />
+        </p>
+    </fieldset>    
+}
+}
+
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

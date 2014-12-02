@@ -1,0 +1,29 @@
+﻿@model Final.Models.ProjectModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>ProjectModel</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.User.FirstName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.User.FirstName)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ProjectID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

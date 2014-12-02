@@ -1,0 +1,60 @@
+﻿@model Final.Models.TestCaseModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend></legend>
+
+        <div>
+
+</div>
+        <br />
+
+    <div class="display-label">
+         <b>Title:</b>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Title)
+    </div>
+
+    <div class="display-label">
+         <b>Steps:</b>
+    </div>
+    <div class="display-field">
+        @Html.Raw(Model.Steps)
+    </div>
+
+    <div class="display-label">
+         <b>Comments:</b>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Comments)
+    </div>
+
+    <div class="display-label">
+         <b>Status:</b>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Status.StatusType)
+    </div>
+
+    <div class="display-label">
+         <b>UAT:</b>
+    </div>
+
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UAT.Name)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <br />
+        <input type="submit"class="btn btn-mini btn-danger" value="Delete" /> 
+    </p>
+}

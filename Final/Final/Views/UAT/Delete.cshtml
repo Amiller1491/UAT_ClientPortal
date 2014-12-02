@@ -1,0 +1,73 @@
+﻿@model Final.Models.UATModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend></legend>
+
+        <div>
+
+</div>
+        <br />
+
+    <div class="display-label">
+         <b>@Html.DisplayNameFor(model => model.Name): </b>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         <b>@Html.DisplayNameFor(model => model.Version): </b>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Version)
+    </div>
+
+    <div class="display-label">
+         <b>@Html.DisplayNameFor(model => model.Intro): </b>
+    </div>
+    <div class="display-field">
+        @Html.Raw(Model.Intro)
+    </div>
+
+    <div class="display-label">
+         <b>@Html.DisplayNameFor(model => model.Started): </b>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Started)
+    </div>
+
+    <div class="display-label">
+         <b>@Html.DisplayNameFor(model => model.LastModified): </b>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LastModified)
+    </div>
+
+    <div class="display-label">
+         <b>@Html.DisplayNameFor(model => model.Project.Name): </b>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Project.Name)
+    </div>
+
+    <div class="display-label">
+         <b>@Html.DisplayNameFor(model => model.Status.StatusType): </b>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Status.StatusType)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <br />
+        <input type="submit" class="btn btn-mini btn-danger" value="Delete" /> 
+    </p>
+}

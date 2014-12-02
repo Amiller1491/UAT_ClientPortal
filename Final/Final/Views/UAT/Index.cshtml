@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Final.Models.UATModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>All UATs</h2>
+@if(User.IsInRole("Admin")){
+<p>
+   @* @Html.ActionLink("Add UAT", "Create",null, new { @class="btn btn-small btn-primary"})*@
+    <a class="btn btn-primary" href="~/UAT/Create" ><i class="icon-plus"></i> Add UAT</a>
+</p>
+}
+<table class="table tbody table-striped tbody table-hover tbody tr:hover table-bordered">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Version
+        </th>
+        <th>
+            Date Started
+        </th>
+        <th>
+            Last Modified
+        </th>
+        <th>
+            Project
+        </th>
+        <th>
+            Status
+        </th>
+        <th>Action</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Version)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Started)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastModified)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Project.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status.StatusType)
+        </td>
+        <td>@if(User.IsInRole("Admin")){
+            @Html.ActionLink("Edit", "Edit", new { id=item.UATID }, new { @class="btn btn-mini"})@Html.Raw(" | ");
+            @Html.ActionLink("Delete", "Delete", new { id=item.UATID }, new { @class="btn btn-mini btn-danger"})
+            }
+            @if(item.StatusD == 5 && User.IsInRole("Admin")){
+                
+            }
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,50 @@
+﻿@model Final.Models.TestCaseModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>TestCaseModel</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Title)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Title)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Steps)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Steps)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Comments)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Comments)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Status.StatusType)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Status.StatusType)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UAT.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UAT.Name)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.TestCaseID }) |
+
+</p>

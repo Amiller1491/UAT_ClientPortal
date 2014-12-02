@@ -1,0 +1,38 @@
+﻿@model Final.Models.ProjectModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend></legend>
+
+        <div>
+
+</div>
+        <br />
+
+    <div class="display-label">
+         <b>Name:</b>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         <b>Client:</b>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.User.FirstName)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <br />
+        <input type="submit" class="btn btn-mini btn-danger" value="Delete" /> 
+    </p>
+}

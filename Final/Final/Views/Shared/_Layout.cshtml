@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<!--added lang='en'-->
+<html lang="en">
+<head>
+    @Scripts.Render("~/bundles/jquery")
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width. initial-scale=1.0" /> <!--the last was argument added -->
+    <title>@ViewBag.Title</title>
+ @*   @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr"  uncommented from the original :Rabin) *@
+
+
+    <!-- Le styles -->
+    <link href="~/Content/bootstrap.css" media="screen" rel="stylesheet" />
+  @*  <style>
+        body{
+            padding-top: 60px; /*60px to make the container go all the way to the boottom of the topbar*/
+    </style>*@
+    <link href="~/Content/bootstrap-responsive.css" media="screen" rel="stylesheet" />
+
+   
+    <!-- Le fav and touch icons //This is something new i don't know about :Rabin-->
+    <link rel="shortcut icon" href="~/Content/icons/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="~/Content/icons/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="~/Content/icons/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="~/Content/icons/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="~/Content/icons/apple-touch-icon-57-precomposed.png">
+
+
+
+</head>
+<body>
+    
+    <!-- Bunch of code has been commented out and been added:Rabin-->
+     <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+     <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="~/Project/Index">User Acceptance Testing : Group II</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+
+             @* //this is how you filter the role in razor:RABIN
+                @if (User.IsInRole("Admin"))
+              {
+                  <strong> if you see me you are admin</strong>
+              }*@
+                
+              
+              @if (User.Identity.IsAuthenticated)
+              {
+                  if (User.IsInRole("Admin"))
+                  {
+                      <li><a class="hover" href="~/User/Index">User</a></li>
+                      <li><a class="hover" href="~/Project/Index">All Projects</a></li>  
+                      <li><a class="hover" href="~/UAT/Index">All UATs</a></li>     
+                      <li><a class="hover" href="~/TestCase/Index">All Test Cases</a></li>  
+                    
+                  }
+                  else
+                  {
+                      <li><a class="hover" href="~/Project/Index"> Project</a></li>
+                  }
+              
+              }
+
+
+            </ul>
+              
+              <div class="pull-right">
+                    <a> 
+                        @Html.Partial("_LoginPartial")
+                    </a>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+        </div>
+
+    <br />
+    <br />
+
+    <div class="container">
+        @RenderBody()
+    </div> <!-- /container -->
+
+        <!-- le javascript
+            =======================
+            placed at the end of the document so the pages load faster -->
+         
+         <!-- calling the bootstrap jquery:Rabin-->
+         <script src="~/Scripts/bootstrap.min.js"> </script>
+         @RenderSection("scripts", required: false)
+
+   
+</body>
+    
+</html>

@@ -1,0 +1,132 @@
+﻿@model IEnumerable<Final.Models.TestCaseModel>
+<div style= "padding-top:10px;"class="row">
+
+
+
+
+@{
+    ViewBag.Title = "Test Cases";
+}
+
+<div class="span5">
+
+@foreach (var item in Model)
+{<h2>@Html.DisplayFor(modelItem => item.UAT.Name) Test Cases</h2>
+    break;
+}
+
+@if (User.IsInRole("Admin"))
+{
+
+}
+
+    <p>
+    
+    <a class="btn btn-primary" href="~/TestCase/Create" ><i class="icon-plus"></i> Add Test Case</a>
+</p>
+<table id="TCinfo" class="table tbody table-striped tbody table-hover tbody tr:hover table-bordered">
+    <tr>
+        <th hidden="hidden">
+            TestCaseID
+        </th>
+        <th>
+            Title
+        </th>
+        <th>
+            Status
+        </th>
+        @if(User.IsInRole("Admin")){
+
+        <th></th>
+        }
+        else{
+            
+        }
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+
+        <td hidden="hidden">
+            @Html.DisplayFor(modelItem => item.TestCaseID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>           
+            @if (item.Status.StatusType.Equals("Approved"))
+            {    
+                <a class="label label-success">@Html.DisplayFor(modelItem => item.Status.StatusType)</a>     
+            }
+
+            else if (item.Status.StatusType.Equals("Rejected"))
+            {
+                <a class="label label-important">@Html.DisplayFor(modelItem => item.Status.StatusType)</a>
+            }
+            else
+            {
+                <a class="label label-warning">@Html.DisplayFor(modelItem => item.Status.StatusType)</a>
+            }
+            
+        </td>
+        @if(User.IsInRole("Client")){
+
+        }
+        else{
+        <td>
+            @Html.ActionLink("View", "ClientEdit", "TestCase", new { id = item.TestCaseID }, new { @class = "btn btn-mini" }) 
+            @if (User.IsInRole("Admin"))
+            {
+            @Html.Raw(" | ");   
+            @Html.ActionLink("Delete", "Delete", "TestCase", new { id = item.TestCaseID }, new { @class = "btn btn-mini btn-danger" })
+
+            }
+        </td>
+        }
+    </tr>
+
+}
+    
+</table>
+@foreach (var item in Model)
+{
+<a class="btn" href="~/Project/ViewUATs/@item.UAT.ProjectID" ><i class="icon-arrow-left"></i> Back to UATs </a>
+    break;
+}
+
+
+</div>
+    <script type="text/javascript"> 
+    $(document).ready(function () { 
+        //S1: Get the Table row <tr> 
+        var tr = $('#TCinfo').find('tr'); 
+        //S2: Bind 'click' event for the <tr> 
+        tr.bind('click', function (e) { 
+            //S4: Read the Value for the zero-th index cell in the clicked <tr> 
+            var TestCaseID = $(this).closest('tr').children('td:eq(0)').text(); ; 
+            //S5: Make an ajax call for Edit Action from the Controller. 
+            $.ajax({ 
+                type: "GET", 
+                url: "/TestCase/ClientEdit/" + TestCaseID,
+                 dataType:"html", 
+                 success: function (s) { 
+                    $('#TCinfos').html(s); 
+                }, 
+                error: function (req, status, error) { 
+                     
+                } 
+            });
+
+            
+        }); 
+
+    });
+
+
+</script>
+        
+        <div class="span6" id="TCinfos" title="Test Case" style="border-bottom-width:thin; padding-top:-25px;"> 
+        </div> 
+
+    </div>
