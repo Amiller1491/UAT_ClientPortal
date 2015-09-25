@@ -80,7 +80,8 @@ namespace Final.Controllers
 
                 if (IsValid(email, H_0_Password))
                 {
-                    db.User.Single(x => x.Email == email).Password = Crypto.HashPassword(password.ConfirmPassword);
+                    //db.User.Single(x => x.Email == email).Password = Crypto.HashPassword(password.ConfirmPassword);
+                    db.User.Single(x => x.Email == email).Password = password.ConfirmPassword;
                     db.SaveChanges();
                     changePasswordSucceeded = true;
                 }/* end of if*/
@@ -144,7 +145,8 @@ namespace Final.Controllers
                 if (user != null)
                 {
                     // if (user.Password == crytpo.Compute(password, user.PasswordSalt))
-                    if (Crypto.VerifyHashedPassword(user.Password, password))
+                    //if (Crypto.VerifyHashedPassword(user.Password, password))
+                    if(user.Password == password)
                     {
                         isValid = true;
                     }
